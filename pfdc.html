@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProfunDC</title>
+  <link rel="icon" type="image/x-icon" href="assets/icon.ico">
+  <style>
+    /* Soothing Latte-Inspired Theme */
+    :root {
+      --bg: #d8d9db;
+      --card-bg: #e9eaed;
+      --text: #4e4e58;
+      --subtext: #4d4d55;
+      --primary: #2563e9;
+      --shadow: rgba(0, 0, 0, 0.05);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .hero-card {
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px var(--shadow);
+      display: flex;
+      padding: 2rem;
+      align-items: center;
+      gap: 2rem;
+      overflow: visible;
+    }
+    .logo {
+      text-align: center;
+      flex: 1;
+    }
+    .logo img { max-width: 180px; border-radius: 8px; }
+    .logo-title {
+      margin-top: 0.3rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--text);
+    }
+    .summary {
+      flex: 3;
+    }
+    .summary h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+    .carousel {
+      position: relative;
+      flex: 1;
+      max-width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+      height: 200px;
+    }
+    .carousel img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px var(--shadow);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .carousel img:hover {
+      transform: scale(2);
+      position: relative;
+      z-index: 10;
+    }
+    .carousel button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--primary);
+      border: none;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+    .carousel button:hover { opacity: 1; filter: brightness(1.2); }
+    .carousel .prev { left: -16px; }
+    .carousel .next { right: -16px; }
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px var(--shadow);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card img {
+      width: 64px; height: 64px;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      margin: 0.5rem 0;
+      font-size: 1.4rem;
+    }
+    .card p {
+      color: var(--subtext);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    pre.code-block {
+      background: var(--card-bg);
+      border: 1px solid var(--subtext);
+      color: var(--subtext);
+      padding: 0.5rem;
+      border-radius: 6px;
+      font-family: Menlo, monospace;
+      font-size: 0.75rem;
+      overflow-x: auto;
+      margin: 0 0 0.5rem;
+      max-width: 280px;
+    }
+    .copy-btn {
+      position: absolute; top: 4px; right: 8px;
+      background: var(--primary);
+      border: none;
+      color: #fff;
+      padding: 0.15rem 0.3rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.6rem;
+    }
+    .button {
+      text-decoration: none;
+      background-color: var(--primary);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      margin: 0.4rem 0;
+      transition: filter 0.2s ease;
+    }
+    .button:hover {
+      filter: brightness(1.1);
+    }
+    .button.disabled {
+      background-color: #e0e0e0;
+      color: #aaaaaa;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .button.disabled {
+      background-color: #e0e0e0;
+      color: #aaaaaa;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    footer {
+      text-align: center;
+      margin: 3rem 0;
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--subtext); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero-card">
+      <div class="logo">
+        <img src="assets/logo.png" alt="ProfunDC Logo">
+        <div class="logo-title">ProfunDC</div>
+      </div>
+      <div class="summary">
+        <h2>Quick Disconnect and Quality of Life tool for Hearthstone</h2>
+      </div>
+      <div class="carousel">
+        <button class="prev" aria-label="Previous">‹</button>
+        <a id="carousel-link" href="assets/sc1.png" target="_blank">
+          <img id="carousel-img" src="assets/sc1.png" alt="Screenshot">
+        </a>
+        <button class="next" aria-label="Next">›</button>
+      </div>
+    </section>
+    <article class="card">
+      <img src="https://img.icons8.com/fluency/96/windows-10.png" alt="Windows">
+      <h2>ProfunDC - Windows</h2>
+      <p>Standalone Windows executable compatible with Windows 10 and newer. Simply download, unzip, and run as administrator.</p>
+      <a href="https://tmpfiles.org/dl/28451135/profundc.zip" class="button">Download ZIP</a>
+      <a href="https://github.com/fishspit/profundc-windows" class="button">View on GitHub</a>
+    </article>
+    <article class="card">
+      <img src="https://img.icons8.com/color/96/linux.png" alt="Linux">
+      <h2>ProfunDC - Linux</h2>
+      <p>Quick‑disconnect CLI for Hearthstone. A Python‑based command‑line tool that monitors GameNetLogger.log to identify server IPs and simulate a network disconnection for a quick reconnect.</p>
+      <div style="position:relative; width:100%; max-width:280px; margin-bottom:1rem;">
+        <pre class="code-block"># Clone the repository
+git clone https://github.com/fishspit/profundc.git</pre>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <a href="https://github.com/fishspit/profundc" class="button">View on GitHub</a>
+    </article>
+    <article class="card">
+      <img src="https://img.icons8.com/fluency/96/mac-os.png" alt="macOS">
+      <h2>ProfunDC - macOS</h2>
+      <p>macOS version coming soon! If you’d like an official macOS build, let us know.</p>
+      <a href="#" class="button disabled">Download DMG</a>
+    </article>
+  </main>
+  <footer>
+    <a href="mailto:fishspitty@gmail.com">fishspitty@gmail.com</a>
+  </footer>
+  <script>
+    // Carousel logic
+    const imgs = ["assets/sc1.png", "assets/sc2.png", "assets/sc3.png"];
+    let idx = 0;
+    const carouselImg = document.getElementById('carousel-img');
+    const carouselLink = document.getElementById('carousel-link');
+    document.querySelector('.prev').addEventListener('click', () => {
+      idx = (idx - 1 + imgs.length) % imgs.length;
+      carouselImg.src = imgs[idx];
+      carouselLink.href = imgs[idx];
+    });
+    document.querySelector('.next').addEventListener('click', () => {
+      idx = (idx + 1) % imgs.length;
+      carouselImg.src = imgs[idx];
+      carouselLink.href = imgs[idx];
+    });
+
+    // Copy button logic
+    document.querySelectorAll('.copy-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const code = button.previousElementSibling.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          button.textContent = 'Copied!';
+          setTimeout(() => button.textContent = 'Copy', 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
